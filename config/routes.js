@@ -2,18 +2,79 @@ const express = require("express");
 const controllers = require("../app/controllers");
 
 const apiRouter = express.Router();
+const validations = require("../app/validations");
+const checkValidate = require("../app/middlewares/checkValidate");
+const authorization = require("../app/middlewares/authorization");
 
-/**
- * TODO: Implement your own API
- *       implementations
- */
-apiRouter.get("/api/v1/posts", controllers.api.v1.postController.list);
-apiRouter.post("/api/v1/posts", controllers.api.v1.postController.create);
-apiRouter.put("/api/v1/posts/:id", controllers.api.v1.postController.update);
-apiRouter.get("/api/v1/posts/:id", controllers.api.v1.postController.show);
+// route users
+apiRouter.post(
+  "/api/v1/auth/login",
+  validations.userValidation.loginDataValidate,
+  checkValidate,
+  controllers.api.v1.userController.login
+);
+apiRouter.get(
+  "/api/v1/auth/user",
+  authorization.authorize,
+  controllers.api.v1.userController.getCurrentUser
+);
+apiRouter.post(
+  "/api/v1/auth/register",
+  validations.userValidation.registerDataValidate,
+  checkValidate,
+  controllers.api.v1.userController.register
+);
+apiRouter.get(
+  "/api/v1/auth/getAllUser",
+  controllers.api.v1.userController.getAllUsers
+);
+apiRouter.patch(
+  "/api/v1/auth/user/:id",
+  authorization.authorize,
+  validations.userValidation.updateDataValidate,
+  checkValidate,
+  controllers.api.v1.userController.update
+);
 apiRouter.delete(
-  "/api/v1/posts/:id",
-  controllers.api.v1.postController.destroy
+  "/api/v1/auth/user/:id",
+  authorization.authorize,
+  controllers.api.v1.userController.delete
+);
+apiRouter.put(
+  "/api/v1/auth/user/password",
+  authorization.authorize,
+  validations.userValidation.changePasswordDataValidate,
+  checkValidate,
+  controllers.api.v1.userController.changePassword
+);
+
+// route products
+apiRouter.post(
+  "/api/v1/auth/product",
+  authorization.authorize,
+  validations.productValidation.productDataValidate,
+  checkValidate,
+  controllers.api.v1.productController.addProduct
+);
+apiRouter.delete(
+  "/api/v1/auth/product/:id",
+  authorization.authorize,
+  controllers.api.v1.productController.deleteProduct
+);
+apiRouter.get(
+  "/api/v1/product/:id",
+  controllers.api.v1.productController.findProduct
+);
+apiRouter.get(
+  "/api/v1/product",
+  controllers.api.v1.productController.getAllProduct
+);
+apiRouter.patch(
+  "/api/v1/auth/product/:id",
+  authorization.authorize,
+  validations.productValidation.productDataValidate,
+  checkValidate,
+  controllers.api.v1.productController.updateProduct
 );
 
 /**
