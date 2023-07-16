@@ -109,6 +109,36 @@ apiRouter.delete(
   controllers.api.v1.cartController.deleteCart
 );
 
+// route orders
+apiRouter.post(
+  "/api/v1/order",
+  authorization.authorize,
+  validations.orderValidation.orderDataValidate,
+  checkValidate,
+  controllers.api.v1.orderController.createOrder
+);
+
+apiRouter.get(
+  "/api/v1/order/user",
+  authorization.authorize,
+  controllers.api.v1.orderController.findByUser
+);
+apiRouter.get("/api/v1/order", controllers.api.v1.orderController.getAll);
+
+apiRouter.get("/api/v1/order/:id", controllers.api.v1.orderController.findById);
+
+apiRouter.patch(
+  "/api/v1/order/:id",
+  authorization.authorize,
+  controllers.api.v1.orderController.updateOrder
+);
+
+apiRouter.delete(
+  "/api/v1/order/:id",
+  authorization.authorize,
+  controllers.api.v1.orderController.deleteProduct
+);
+
 /**
  * TODO: Delete this, this is just a demonstration of
  *       error handler

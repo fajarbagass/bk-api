@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
+  class Order extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.hasMany(models.Cart, {
-        foreignKey: "product_id",
+      Order.belongsTo(models.User, {
+        foreignKey: "user_id",
       });
-      Product.hasMany(models.Order, {
+      Order.belongsTo(models.Product, {
         foreignKey: "product_id",
       });
     }
   }
-  Product.init(
+  Order.init(
     {
       code: {
         type: DataTypes.STRING,
@@ -27,84 +27,74 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      type: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: {
-            msg: "Tipe harus diisi",
-          },
-        },
-      },
-      size: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: {
-            msg: "Ukuran harus diisi",
-          },
-        },
-      },
-      name: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: {
-            msg: "Nama harus diisi",
-          },
-        },
-      },
-      color: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: {
-            msg: "warna harus diisi",
-          },
-        },
-      },
-      price: {
+      user_id: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            msg: "Harga harus diisi",
+            msg: "ID pengguna harus diisi",
           },
           isNumeric: {
-            msg: "Harga tidak sesuai",
+            msg: "ID pengguna tidak sesuai",
           },
         },
       },
-      pieces: {
+      product_id: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            msg: "Potongan harus diisi",
+            msg: "ID produk harus diisi",
           },
           isNumeric: {
-            msg: "Potongan tidak sesuai",
+            msg: "ID produk tidak sesuai",
           },
         },
       },
-      surface: {
+      quantity: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            msg: "Kuantitas harus diisi",
+          },
+          isNumeric: {
+            msg: "Kuantitas tidak sesuai",
+          },
+        },
+      },
+      total_amount: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            msg: "Total Harga harus diisi",
+          },
+          isNumeric: {
+            msg: "Total Harga tidak sesuai",
+          },
+        },
+      },
+      status: {
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            msg: "Permukaan harus diisi",
+            msg: "Status harus diisi",
           },
         },
       },
-      picture: {
+      payment_proof: {
         type: DataTypes.TEXT,
         validate: {
           notEmpty: {
-            msg: "Foto harus diisi",
+            msg: "Bukti Pembayaran harus diisi",
           },
           isUrl: {
-            msg: "Foto tidak sesuai",
+            msg: "Bukti Pembayaran tidak sesuai",
           },
         },
       },
     },
     {
       sequelize,
-      modelName: "Product",
+      modelName: "Order",
     }
   );
-  return Product;
+  return Order;
 };

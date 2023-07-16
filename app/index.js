@@ -11,6 +11,7 @@ app.use(express.static("public"));
 
 app.use("/public/users", express.static("public/users"));
 app.use("/public/products", express.static("public/products"));
+app.use("/public/payment_proof", express.static("public/payment_proof"));
 
 // app.use(fileUpload({ useTempFiles: true }));
 
