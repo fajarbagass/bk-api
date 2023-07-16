@@ -122,7 +122,7 @@ module.exports = {
       }
     }
   },
-  async deleteProduct(req, res) {
+  async deleteOrder(req, res) {
     try {
       const id = req.params.id;
       await orderService.deleteData(id);
