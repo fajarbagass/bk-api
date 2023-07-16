@@ -77,6 +77,7 @@ apiRouter.patch(
   controllers.api.v1.productController.updateProduct
 );
 
+// route carts
 apiRouter.post(
   "/api/v1/cart",
   authorization.authorize,
@@ -136,7 +137,41 @@ apiRouter.patch(
 apiRouter.delete(
   "/api/v1/order/:id",
   authorization.authorize,
-  controllers.api.v1.orderController.deleteProduct
+  controllers.api.v1.orderController.deleteOrder
+);
+
+// route reviews
+apiRouter.post(
+  "/api/v1/review",
+  authorization.authorize,
+  validations.productReviewValidation.reviewDataValidate,
+  checkValidate,
+  controllers.api.v1.productReviewController.createReview
+);
+apiRouter.get(
+  "/api/v1/review/user",
+  authorization.authorize,
+  controllers.api.v1.productReviewController.findByUser
+);
+apiRouter.get(
+  "/api/v1/review",
+  controllers.api.v1.productReviewController.getAll
+);
+apiRouter.get(
+  "/api/v1/review/:id",
+  controllers.api.v1.productReviewController.findById
+);
+apiRouter.put(
+  "/api/v1/review/:id",
+  authorization.authorize,
+  validations.productReviewValidation.reviewDataValidate,
+  checkValidate,
+  controllers.api.v1.productReviewController.updateReview
+);
+apiRouter.delete(
+  "/api/v1/review/:id",
+  authorization.authorize,
+  controllers.api.v1.productReviewController.deleteReview
 );
 
 /**
