@@ -77,6 +77,38 @@ apiRouter.patch(
   controllers.api.v1.productController.updateProduct
 );
 
+apiRouter.post(
+  "/api/v1/cart",
+  authorization.authorize,
+  validations.cartValidation.cartCreateDataValidate,
+  checkValidate,
+  controllers.api.v1.cartController.createCart
+);
+
+apiRouter.get(
+  "/api/v1/cart/user",
+  authorization.authorize,
+  controllers.api.v1.cartController.findByUser
+);
+
+apiRouter.get("/api/v1/cart", controllers.api.v1.cartController.getAll);
+
+apiRouter.get("/api/v1/cart/:id", controllers.api.v1.cartController.findById);
+
+apiRouter.put(
+  "/api/v1/cart/:id",
+  authorization.authorize,
+  validations.cartValidation.cartUpdateDataValidate,
+  checkValidate,
+  controllers.api.v1.cartController.updateCart
+);
+
+apiRouter.delete(
+  "/api/v1/cart/:id",
+  authorization.authorize,
+  controllers.api.v1.cartController.deleteCart
+);
+
 /**
  * TODO: Delete this, this is just a demonstration of
  *       error handler
