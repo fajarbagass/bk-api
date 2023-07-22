@@ -34,7 +34,6 @@ module.exports = {
     return fileName;
   },
   updatePicture(file, product_review) {
-    console.log(product_review);
     let photo = "";
     const newPicture = file.picture;
     const photoSize = newPicture.data.length;
