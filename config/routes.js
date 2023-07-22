@@ -124,6 +124,10 @@ apiRouter.get(
   authorization.authorize,
   controllers.api.v1.orderController.findByUser
 );
+apiRouter.get(
+  "/api/v1/order/data",
+  controllers.api.v1.orderController.findByCode
+);
 apiRouter.get("/api/v1/order", controllers.api.v1.orderController.getAll);
 
 apiRouter.get("/api/v1/order/:id", controllers.api.v1.orderController.findById);
@@ -161,7 +165,7 @@ apiRouter.get(
   "/api/v1/review/:id",
   controllers.api.v1.productReviewController.findById
 );
-apiRouter.put(
+apiRouter.patch(
   "/api/v1/review/:id",
   authorization.authorize,
   validations.productReviewValidation.reviewDataValidate,

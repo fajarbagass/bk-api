@@ -30,6 +30,13 @@ module.exports = {
       throw error;
     }
   },
+  async findDataByCode(data) {
+    try {
+      return await orderRepository.filterByCode(data);
+    } catch (error) {
+      throw error;
+    }
+  },
   async getAllData() {
     return await orderRepository.getAll();
   },
@@ -37,7 +44,6 @@ module.exports = {
     try {
       const id = order.id;
       const orderData = await orderRepository.find(id);
-      console.log(orderData, "cek");
 
       if (!orderData) {
         throw {

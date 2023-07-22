@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Order, User, Product } = require("../models");
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
             "phone_number",
             "role",
             "address",
+            "picture",
           ],
         },
         {
@@ -38,7 +40,7 @@ module.exports = {
         "id",
         "code",
         "quantity",
-        "total_amount",
+        "shipping_cost",
         "status",
         "payment_proof",
       ],
@@ -58,6 +60,7 @@ module.exports = {
             "phone_number",
             "role",
             "address",
+            "picture",
           ],
         },
         {
@@ -83,10 +86,60 @@ module.exports = {
         "id",
         "code",
         "quantity",
-        "total_amount",
+        "shipping_cost",
+        "status",
+        "payment_proof",
+        "updatedAt",
+      ],
+      order: [["updatedAt", "DESC"]],
+    });
+  },
+
+  filterByCode(code) {
+    return Order.findAll({
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "name",
+            "email",
+            "phone_number",
+            "role",
+            "address",
+            "picture",
+          ],
+        },
+        {
+          model: Product,
+          attributes: [
+            "id",
+            "code",
+            "type",
+            "size",
+            "name",
+            "color",
+            "price",
+            "pieces",
+            "surface",
+            "picture",
+          ],
+        },
+      ],
+      where: {
+        code: {
+          [Op.like]: `%${code}%`,
+        },
+      },
+      attributes: [
+        "id",
+        "code",
+        "quantity",
+        "shipping_cost",
         "status",
         "payment_proof",
       ],
+      order: [["createdAt", "DESC"]],
     });
   },
 
@@ -102,6 +155,7 @@ module.exports = {
             "phone_number",
             "role",
             "address",
+            "picture",
           ],
         },
         {
@@ -124,10 +178,12 @@ module.exports = {
         "id",
         "code",
         "quantity",
-        "total_amount",
+        "shipping_cost",
         "status",
         "payment_proof",
+        "updatedAt",
       ],
+      order: [["updatedAt", "DESC"]],
     });
   },
 
@@ -137,7 +193,7 @@ module.exports = {
       user_id: data.user_id,
       product_id: data.product_id,
       quantity: data.quantity,
-      total_amount: data.total_amount,
+      shipping_cost: data.shipping_cost,
       status: data.status,
     });
   },
@@ -146,6 +202,8 @@ module.exports = {
     return Order.update(
       {
         status: data.status,
+        shipping_cost: data.shipping_cost,
+        quantity: data.quantity,
         payment_proof: photo,
       },
       { where: { id } }

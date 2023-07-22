@@ -43,6 +43,22 @@ module.exports = {
     }
   },
 
+  async findByCode(req, res) {
+    try {
+      const code = req.query.code;
+      const order = await orderService.findDataByCode(req.query.code);
+      res.status(200).json({
+        status: "success",
+        data: order,
+      });
+    } catch (error) {
+      res.status(500).json({
+        name: error.name,
+        message: error.message,
+      });
+    }
+  },
+
   async findById(req, res) {
     try {
       const id = req.params.id;

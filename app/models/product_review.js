@@ -46,6 +46,17 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      picture: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: {
+            msg: "Foto harus diisi",
+          },
+          isUrl: {
+            msg: "Foto tidak sesuai",
+          },
+        },
+      },
     },
     {
       sequelize,

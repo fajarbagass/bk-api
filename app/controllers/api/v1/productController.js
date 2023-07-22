@@ -32,7 +32,6 @@ module.exports = {
     try {
       const user = req.params;
       const admin = req.user;
-      console.log(user, "cek");
       await productService.deleteData(user, admin);
       res.status(200).json({
         status: "success",

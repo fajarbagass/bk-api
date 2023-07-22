@@ -10,7 +10,7 @@ module.exports = {
             "id",
             "code",
             "quantity",
-            "total_amount",
+            "shipping_cost",
             "status",
             "payment_proof",
           ],
@@ -47,7 +47,7 @@ module.exports = {
       where: {
         id,
       },
-      attributes: ["id", "rating", "review"],
+      attributes: ["id", "rating", "review", "picture"],
       order: [["id", "DESC"]],
     });
   },
@@ -60,7 +60,7 @@ module.exports = {
             "id",
             "code",
             "quantity",
-            "total_amount",
+            "shipping_cost",
             "status",
             "payment_proof",
           ],
@@ -97,7 +97,7 @@ module.exports = {
           ],
         },
       ],
-      attributes: ["id", "rating", "review"],
+      attributes: ["id", "rating", "review", "picture"],
       order: [["createdAt", "DESC"]],
     });
   },
@@ -110,7 +110,7 @@ module.exports = {
             "id",
             "code",
             "quantity",
-            "total_amount",
+            "shipping_cost",
             "status",
             "payment_proof",
           ],
@@ -144,22 +144,19 @@ module.exports = {
           ],
         },
       ],
-      attributes: ["id", "rating", "review"],
+      attributes: ["id", "rating", "review", "picture"],
       order: [["createdAt", "DESC"]],
     });
   },
-  create(data) {
-    return Product_Review.create({
-      order_id: data.order_id,
-      rating: data.rating,
-      review: data.review,
-    });
+  create(review) {
+    return Product_Review.create(review);
   },
-  update(id, data) {
+  update(id, data, photo) {
     return Product_Review.update(
       {
         rating: data.rating,
         review: data.review,
+        picture: photo,
       },
       {
         where: { id },

@@ -63,14 +63,14 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      total_amount: {
+      shipping_cost: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            msg: "Total Harga harus diisi",
+            msg: "Biaya pengiriman harus diisi",
           },
           isNumeric: {
-            msg: "Total Harga tidak sesuai",
+            msg: "Biaya pengiriman tidak sesuai",
           },
         },
       },

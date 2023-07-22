@@ -5,7 +5,6 @@ module.exports = {
     try {
       const data = req.body;
       const cart = await cartService.createData(data);
-      console.log(data);
       res.status(200).json({
         status: "success",
         data: cart,

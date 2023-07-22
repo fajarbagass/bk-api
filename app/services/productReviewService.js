@@ -1,9 +1,27 @@
 const productReviewRepository = require("../repositories/productReviewRepository");
+const uploadReviews = require("../utils/uploadReviews");
 
 module.exports = {
-  async createData(data) {
+  async createData(data, file) {
     try {
-      return await productReviewRepository.create(data);
+      const order_id = data.order_id;
+      const rating = data.rating;
+      const review = data.review;
+      if (file === null) {
+        return await productReviewRepository.create({
+          order_id,
+          rating,
+          review,
+        });
+      } else {
+        const picture = await uploadReviews.addPicture(file);
+        return await productReviewRepository.create({
+          order_id,
+          rating,
+          review,
+          picture,
+        });
+      }
     } catch (error) {
       throw error;
     }
@@ -32,8 +50,10 @@ module.exports = {
   async getAllData() {
     return await productReviewRepository.getAll();
   },
-  async updateData(id, data) {
+  async updateData(review, data, file) {
     try {
+      const id = review.id;
+      const picture = review.picture;
       const reviewData = await productReviewRepository.find(id);
       if (!reviewData) {
         throw {
@@ -41,7 +61,17 @@ module.exports = {
           message: "Data ulasan tidak ditemukan",
         };
       }
-      return productReviewRepository.update(id, data);
+      if (file === undefined) {
+        await productReviewRepository.update(id, data);
+      } else {
+        if (picture === null) {
+          const photo = await uploadReviews.updatePicture(file);
+          await productReviewRepository.update(id, data, photo);
+        } else {
+          const photo = await uploadReviews.updatePicture(file, review);
+          await productReviewRepository.update(id, data, photo);
+        }
+      }
     } catch (error) {
       throw error;
     }
@@ -55,6 +85,7 @@ module.exports = {
           message: "Data ulasan tidak ditemukan",
         };
       }
+      await uploadReviews.deletePicture(reviewData);
       return productReviewRepository.delete(id);
     } catch (error) {
       throw error;

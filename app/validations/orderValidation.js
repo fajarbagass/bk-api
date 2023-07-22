@@ -24,13 +24,6 @@ module.exports = {
       .withMessage("Jumlah order harus diisi")
       .isNumeric()
       .withMessage("Jumlah order tidak sesuai"),
-    body("total_amount")
-      .exists()
-      .not()
-      .isEmpty()
-      .withMessage("Total harga harus diisi")
-      .isNumeric()
-      .withMessage("Total harga tidak sesuai"),
     body("status").exists().not().isEmpty().withMessage("Status harus diisi"),
   ],
 };

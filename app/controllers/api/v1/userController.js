@@ -6,7 +6,6 @@ module.exports = {
     try {
       const data = req.body;
       const user = await userServices.login(data);
-      console.log(data);
       res.status(200).json({
         status: "success",
         data: {
