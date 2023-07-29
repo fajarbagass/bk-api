@@ -1,5 +1,3 @@
-const { use } = require("../../config/routes");
-const cart = require("../models/cart");
 const cartRepository = require("../repositories/cartRepository");
 
 module.exports = {

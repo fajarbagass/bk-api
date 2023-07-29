@@ -24,6 +24,7 @@ module.exports = {
                 "phone_number",
                 "role",
                 "address",
+                "picture",
               ],
             },
             {
@@ -77,6 +78,7 @@ module.exports = {
                 "phone_number",
                 "role",
                 "address",
+                "picture",
               ],
             },
             {
@@ -124,6 +126,7 @@ module.exports = {
                 "phone_number",
                 "role",
                 "address",
+                "picture",
               ],
             },
             {

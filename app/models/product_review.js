@@ -40,11 +40,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       review: {
         type: DataTypes.TEXT,
-        validate: {
-          notEmpty: {
-            msg: "Ulasan harus diisi",
-          },
-        },
       },
       picture: {
         type: DataTypes.TEXT,

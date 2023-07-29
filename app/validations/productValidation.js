@@ -1,5 +1,4 @@
 const { body } = require("express-validator");
-const { picture } = require("../../../tokoku-api/app/utils/cloudinary");
 module.exports = {
   productDataValidate: [
     body("code").exists().not().isEmpty().withMessage("Kode harus diisi"),

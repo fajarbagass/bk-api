@@ -148,8 +148,6 @@ apiRouter.delete(
 apiRouter.post(
   "/api/v1/review",
   authorization.authorize,
-  validations.productReviewValidation.reviewDataValidate,
-  checkValidate,
   controllers.api.v1.productReviewController.createReview
 );
 apiRouter.get(
@@ -168,8 +166,6 @@ apiRouter.get(
 apiRouter.patch(
   "/api/v1/review/:id",
   authorization.authorize,
-  validations.productReviewValidation.reviewDataValidate,
-  checkValidate,
   controllers.api.v1.productReviewController.updateReview
 );
 apiRouter.delete(
