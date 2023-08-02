@@ -13,7 +13,6 @@ module.exports = {
     password: DB_PASSWORD,
     database: `${DB_NAME}_development`,
     host: DB_HOST,
-    url: DB_URL,
     port: DB_PORT,
     dialect: "postgres",
   },
@@ -22,15 +21,17 @@ module.exports = {
     password: DB_PASSWORD,
     database: `${DB_NAME}_test`,
     host: DB_HOST,
-    url: DB_URL,
+    port: DB_PORT,
     dialect: "postgres",
   },
   production: {
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: `${DB_NAME}_production`,
-    host: DB_HOST,
-    url: DB_URL,
     dialect: "postgres",
+    use_env_variable: DB_URL,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
