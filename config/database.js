@@ -1,4 +1,10 @@
 /** Destruct environment variable to get database configuration */
+const pg = require("pg");
+const { Pool } = pg;
+const pool = new Pool({
+  connectionString: process.env.POSGRES_URL + "?sslmode=require",
+});
+
 const {
   DB_USERNAME = "postgres",
   DB_PASSWORD = "12345",
@@ -7,6 +13,7 @@ const {
 } = process.env;
 
 module.exports = {
+  pool,
   development: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
