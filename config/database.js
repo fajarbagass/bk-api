@@ -1,8 +1,8 @@
 const {
   DB_USERNAME = "postgres",
-  DB_PASSWORD = "12345",
-  DB_HOST = "127.0.0.1",
-  DB_NAME = "db_bk",
+  DB_PASSWORD = "qldh2XZQ5lJimphU7jyh",
+  DB_HOST = "containers-us-west-101.railway.app",
+  DB_NAME = "railway",
   DB_URL = "postgresql://postgres:qldh2XZQ5lJimphU7jyh@containers-us-west-101.railway.app:8030/railway",
 } = process.env;
 
