@@ -1,17 +1,9 @@
-require("dotenv").config();
-const { Pool } = require("pg");
-const isProduction = process.env.NODE_ENV === "production";
-const connectionString = `postgresql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.NAME}`;
-
-const pool = new Pool({
-  connectionsString: isProduction ? process.env.DB_URL : connectionString,
-});
+/** Destruct environment variable to get database configuration */
 const {
-  DB_USERNAME = "",
-  DB_PASSWORD = "",
-  DB_HOST = "",
-  DB_NAME = "",
-  DB_PORT = "5432",
+  DB_USERNAME = "postgres",
+  DB_PASSWORD = "12345",
+  DB_HOST = "127.0.0.1",
+  DB_NAME = "db_bk",
 } = process.env;
 
 module.exports = {
@@ -20,7 +12,6 @@ module.exports = {
     password: DB_PASSWORD,
     database: `${DB_NAME}_development`,
     host: DB_HOST,
-    port: DB_PORT,
     dialect: "postgres",
   },
   test: {
@@ -28,18 +19,13 @@ module.exports = {
     password: DB_PASSWORD,
     database: `${DB_NAME}_test`,
     host: DB_HOST,
-    port: DB_PORT,
     dialect: "postgres",
   },
   production: {
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: `${DB_NAME}_production`,
+    host: DB_HOST,
     dialect: "postgres",
-    use_env_variable: "DB_URL",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-    pool,
   },
 };
