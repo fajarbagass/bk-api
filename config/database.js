@@ -1,9 +1,9 @@
 /** Destruct environment variable to get database configuration */
 const {
-  DB_USERNAME = "postgres",
-  DB_PASSWORD = "12345",
-  DB_HOST = "127.0.0.1",
-  DB_NAME = "db_bk",
+  DB_USERNAME = "default",
+  DB_PASSWORD = "cxwJP0afUY8j",
+  DB_HOST = "ep-fancy-recipe-71699450-pooler.us-east-1.postgres.vercel-storage.com",
+  DB_NAME = "verceldb",
 } = process.env;
 
 module.exports = {
