@@ -2,7 +2,7 @@
 const {
   DB_USERNAME = "postgres",
   DB_PASSWORD = "12345",
-  DB_HOST = "localhost",
+  DB_HOST = "mysql",
   DB_NAME = "db_bk",
 } = process.env;
 
