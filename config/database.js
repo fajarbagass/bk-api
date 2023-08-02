@@ -1,8 +1,9 @@
 const {
-  DB_USERNAME = "postgres",
-  DB_PASSWORD = "qldh2XZQ5lJimphU7jyh",
-  DB_HOST = "containers-us-west-101.railway.app",
-  DB_NAME = "railway",
+  DB_USERNAME = "",
+  DB_PASSWORD = "",
+  DB_HOST = "",
+  DB_NAME = "",
+  DB_PORT = "5432",
   DB_URL = "postgresql://postgres:qldh2XZQ5lJimphU7jyh@containers-us-west-101.railway.app:8030/railway",
 } = process.env;
 
@@ -13,6 +14,7 @@ module.exports = {
     database: `${DB_NAME}_development`,
     host: DB_HOST,
     url: DB_URL,
+    port: DB_PORT,
     dialect: "postgres",
   },
   test: {
