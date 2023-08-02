@@ -1,30 +1,37 @@
-const {
-  DB_USERNAME = "postgres",
-  DB_PASSWORD = "12345",
-  DB_HOST = "127.0.0.1",
-  DB_NAME = "db_bk",
-} = process.env;
+const { Sequelize } = require("../app/models");
+const dotenv = require("dotenv");
 
-module.exports = {
-  development: {
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: `${DB_NAME}_development`,
-    host: DB_HOST,
-    dialect: "postgres",
+dotenv.config();
+
+const { DB_USERNAME, DB_PASSWORD, DB_NAME, DB_URL } = process.env;
+
+const db = new Sequelize(DB_URL, {
+  define: {
+    timestamps: false,
   },
-  test: {
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: `${DB_NAME}_test`,
-    host: DB_HOST,
-    dialect: "postgres",
-  },
-  production: {
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: `${DB_NAME}_production`,
-    host: DB_HOST,
-    dialect: "postgres",
-  },
-};
+});
+
+module.exports = db;
+// module.exports = {
+//   development: {
+//     username: DB_USERNAME,
+//     password: DB_PASSWORD,
+//     database: `${DB_NAME}_development`,
+//     host: DB_HOST,
+//     dialect: "postgres",
+//   },
+//   test: {
+//     username: DB_USERNAME,
+//     password: DB_PASSWORD,
+//     database: `${DB_NAME}_test`,
+//     host: DB_HOST,
+//     dialect: "postgres",
+//   },
+//   production: {
+//     username: DB_USERNAME,
+//     password: DB_PASSWORD,
+//     database: `${DB_NAME}_production`,
+//     host: DB_HOST,
+//     dialect: "postgres",
+//   },
+// };
