@@ -14,9 +14,6 @@ module.exports = {
     host: DB_HOST,
     url: DB_URL,
     dialect: "postgres",
-    define: {
-      timestamps: false,
-    },
   },
   test: {
     username: DB_USERNAME,
