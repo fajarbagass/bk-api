@@ -1,6 +1,5 @@
 /** Destruct environment variable to get database configuration */
-const pg = require("pg");
-const { Pool } = pg;
+const { Pool } = require("pg");
 const pool = new Pool({
   connectionString: process.env.POSGRES_URL + "?sslmode=require",
 });
