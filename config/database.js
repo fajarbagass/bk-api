@@ -1,10 +1,17 @@
+require("dotenv").config();
+const { Pool } = require("pg");
+const isProduction = process.env.NODE_ENV === "production";
+const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.NAME}`;
+
+const pool = new Pool({
+  connectionsString: isProduction ? process.env.DB_URL : connectionString,
+});
 const {
   DB_USERNAME = "",
   DB_PASSWORD = "",
   DB_HOST = "",
   DB_NAME = "",
   DB_PORT = "5432",
-  DB_URL = "postgresql://postgres:qldh2XZQ5lJimphU7jyh@containers-us-west-101.railway.app:8030/railway",
 } = process.env;
 
 module.exports = {
@@ -33,5 +40,6 @@ module.exports = {
         rejectUnauthorized: false,
       },
     },
+    pool,
   },
 };
