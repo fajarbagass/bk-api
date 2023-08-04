@@ -65,7 +65,7 @@ module.exports = {
         await productReviewRepository.update(id, data);
       } else {
         if (picture === null) {
-          const photo = await uploadReviews.updatePicture(file);
+          const photo = await uploadReviews.addPicture(file);
           await productReviewRepository.update(id, data, photo);
         } else {
           const photo = await uploadReviews.updatePicture(file, review);
